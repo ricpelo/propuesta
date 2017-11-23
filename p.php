@@ -1,3 +1,4 @@
+#!/usr/bin/env php
 <?php
 
 require 'vendor/autoload.php';
@@ -10,10 +11,6 @@ echo '<table>' . PHP_EOL;
 foreach ($objWorksheet->getRowIterator() as $row) {
     echo '<tr>' . PHP_EOL;
     $cellIterator = $row->getCellIterator();
-    $cellIterator->setIterateOnlyExistingCells(FALSE); // This loops through all cells,
-                                                       //    even if a cell value is not set.
-                                                       // By default, only cells that have a value 
-                                                       //    set will be iterated.
     foreach ($cellIterator as $cell) {
         echo '<td>' . 
              $cell->getValue() . 
