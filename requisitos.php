@@ -19,6 +19,15 @@ for ($row = 2; $row <= $highestRow; $row++) {
     $tipo        = $objWorksheet->getCell("E$row")->getValue();
     $complejidad = $objWorksheet->getCell("F$row")->getValue();
     $entrega     = $objWorksheet->getCell("G$row")->getValue();
+    $incidencia  = $objWorksheet->getCell("H$row")->getValue();
+
+    if ($incidencia === null) {
+        // Crear la incidencia con ghi y actualizar el .xlsx
+        $mensaje = "($codigo) " . $corta . "\n" . $larga;
+        $hito = mb_substr($entrega, 1, 1);
+        // `ghi open -m $mensaje --claim -M $hito -L label`
+    }
+    
 
     echo "| **$codigo**     | **$corta**   |" . PHP_EOL;
     echo "| --------------: | :----------- |" . PHP_EOL;
@@ -27,6 +36,7 @@ for ($row = 2; $row <= $highestRow; $row++) {
     echo "| **Tipo**        | $tipo        |" . PHP_EOL;
     echo "| **Complejidad** | $complejidad |" . PHP_EOL;
     echo "| **Entrega**     | $entrega     |" . PHP_EOL;
+    echo "| **Incidencia**  | $incidencia  |" . PHP_EOL;
     echo "\n[]()\n\n";
 
     $objWorksheet->getCellByColumnAndRow(7, $row)->setValue('hola');
