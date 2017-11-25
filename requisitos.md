@@ -5,7 +5,7 @@
 | **Tipo**        | Técnico                |
 | **Complejidad** | Fácil         |
 | **Entrega**     | v1             |
-| **Incidencia**  | [23](https://github.com/ricpelo/pro/issues/23) |
+| **Incidencia**  | [38](https://github.com/ricpelo/pro/issues/38) |
 
 []()
 
@@ -16,7 +16,7 @@
 | **Tipo**        | Técnico                |
 | **Complejidad** | Fácil         |
 | **Entrega**     | v2             |
-| **Incidencia**  | [24](https://github.com/ricpelo/pro/issues/24) |
+| **Incidencia**  | [39](https://github.com/ricpelo/pro/issues/39) |
 
 []()
 
@@ -27,7 +27,7 @@
 | **Tipo**        | Información                |
 | **Complejidad** | Fácil         |
 | **Entrega**     | v3             |
-| **Incidencia**  | [25](https://github.com/ricpelo/pro/issues/25) |
+| **Incidencia**  | [40](https://github.com/ricpelo/pro/issues/40) |
 
 []()
 
@@ -38,7 +38,7 @@
 | **Tipo**        | Funcional                |
 | **Complejidad** | Media         |
 | **Entrega**     | v3             |
-| **Incidencia**  | [26](https://github.com/ricpelo/pro/issues/26) |
+| **Incidencia**  | [41](https://github.com/ricpelo/pro/issues/41) |
 
 []()
 
@@ -49,7 +49,7 @@
 | **Tipo**        | Información                |
 | **Complejidad** | Difícil         |
 | **Entrega**     | v3             |
-| **Incidencia**  | [27](https://github.com/ricpelo/pro/issues/27) |
+| **Incidencia**  | [42](https://github.com/ricpelo/pro/issues/42) |
 
 []()
 

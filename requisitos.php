@@ -13,10 +13,16 @@ $requisitos = '';
 $resumen = "\n\n### Cuadro resumen\n\n"
          . "| **Requisito** | **Prioridad** | **Tipo** | **Complejidad** | **Entrega** | **Incidencia** |\n"
          . "| :------------ | :-----------: | :------: | :-------------: | :---------: | :------------: |\n";
+
 $salida = `ghi`;
 $matches = [];
-preg_match('/# ([^ ]+)/', $salida, $matches);
-$repo = $matches[1];
+
+if (preg_match('%# ([^ ]+/[^ ]+)%', $salida, $matches) === 1) {
+    $repo = $matches[1];
+} else {
+    echo "Error: no se puede identificar el repositorio de GitHub asociado.\n";
+    exit(1);
+}
 
 for ($row = 2; $row <= $highestRow; $row++) {
     $codigo      = $objWorksheet->getCell("A$row")->getValue();
@@ -36,11 +42,16 @@ for ($row = 2; $row <= $highestRow; $row++) {
         $tipoGhi = mb_strtolower($tipo);
         $complejidadGhi = mb_strtolower($complejidad);
         $entregaGhi = mb_substr($entrega, 1, 1);
+        echo "Generando incidencia para $codigo en GitHub...\n";
         $salida = `ghi open -m "$mensaje" --claim -L $prioridadGhi -L $tipoGhi -L $complejidadGhi -M $entregaGhi`;
         $matches = [];
-        preg_match('/^#([0-9]+):/', $salida, $matches);
-        $incidencia = $matches[1];
-        $link = "https://github.com/$repo/issues/$incidencia";
+        if (preg_match('/^#([0-9]+):/', $salida, $matches) === 1) {
+            $incidencia = $matches[1];
+            $link = "https://github.com/$repo/issues/$incidencia";
+        } else {
+            echo "Error: no se ha podido crear la incidencia en GitHub.\n";
+            $incidencia = $link = '';
+        }
     }
 
     $requisitos .= "| **$codigo**     | **$corta**           |\n"
