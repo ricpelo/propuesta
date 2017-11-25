@@ -2,10 +2,6 @@
 
 all: check req
 
-check:
-	./check-packages.sh
-	./check-ghi.sh
-
 setup:
 	ghi label mínimo
 	ghi label importante -c mediumpurple
@@ -17,8 +13,12 @@ setup:
 	ghi label técnico
 	ghi label información
 
+check:
+	./check-packages.sh
+	./check-ghi.sh
+
 req:
-	php requisitos.php
+	php requisitos.php -i
 	pandoc -s propuesta.md requisitos.md -o requisitos.txt
 	pandoc -s -N --toc requisitos.txt -V geometry="margin=1in" -V lang=es -V fontfamily=mathpazo -V fontsize=10pt -o propuesta.pdf
 	rm requisitos.txt

@@ -1,5 +1,5 @@
 
-## Catálogo de requisitos
+# Catálogo de requisitos
 
 | **R01**     | **sdfsdfsdfsdfs**           |
 | --------------: | :------------------- |
@@ -57,7 +57,7 @@
 []()
 
 
-### Cuadro resumen
+## Cuadro resumen
 
 | **Requisito** | **Prioridad** | **Tipo** | **Complejidad** | **Entrega** | **Incidencia** |
 | :------------ | :-----------: | :------: | :-------------: | :---------: | :------------: |
