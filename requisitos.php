@@ -34,6 +34,7 @@ for ($row = 2; $row <= $highestRow; $row++) {
     $complejidad = $objWorksheet->getCell("F$row")->getValue();
     $entrega     = $objWorksheet->getCell("G$row")->getValue();
     $incidencia  = $objWorksheet->getCell("H$row")->getValue();
+    $link = '';
 
     if ($incidencia === null) {
         // Crear la incidencia con ghi y actualizar el .xlsx
@@ -42,15 +43,15 @@ for ($row = 2; $row <= $highestRow; $row++) {
         $tipoGhi = mb_strtolower($tipo);
         $complejidadGhi = mb_strtolower($complejidad);
         $entregaGhi = mb_substr($entrega, 1, 1);
-        echo "Generando incidencia para $codigo en GitHub...\n";
+        echo "Generando incidencia para $codigo en GitHub...";
         $salida = `ghi open -m "$mensaje" --claim -L $prioridadGhi -L $tipoGhi -L $complejidadGhi -M $entregaGhi`;
         $matches = [];
         if (preg_match('/^#([0-9]+):/', $salida, $matches) === 1) {
             $incidencia = $matches[1];
             $link = "https://github.com/$repo/issues/$incidencia";
+            echo "#$incidencia\n";
         } else {
-            echo "Error: no se ha podido crear la incidencia en GitHub.\n";
-            $incidencia = $link = '';
+            echo "\nError: no se ha podido crear la incidencia en GitHub.\n";
         }
     }
 
@@ -70,7 +71,6 @@ for ($row = 2; $row <= $highestRow; $row++) {
     $objWorksheet->getCell("H$row")->getHyperlink()->setUrl($link);
 }
 
-file_put_contents('requisitos.md', $requisitos, LOCK_EX);
-file_put_contents('resumen.md', $resumen, LOCK_EX);
+file_put_contents('requisitos.md', $requisitos . $resumen, LOCK_EX);
 $writer = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
-$writer->save('requisitos2.xlsx');
+$writer->save('requisitos.xlsx');
