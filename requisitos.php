@@ -11,8 +11,12 @@ $highestColumn = $objWorksheet->getHighestDataColumn(); // e.g 'F'
 $highestColumnIndex = PHPExcel_Cell::columnIndexFromString($highestColumn); // e.g. 5
 $requisitos = '';
 $resumen = "\n\n### Cuadro resumen\n\n"
-         . "| **Requisito** | **Prioridad** | **Tipo** | **Complejidad** | **Entrega ** | **Incidencia** |\n"
-         . "| :------------ | :-----------: | :------: | :-------------: | :----------: | :------------: |\n";
+         . "| **Requisito** | **Prioridad** | **Tipo** | **Complejidad** | **Entrega** | **Incidencia** |\n"
+         . "| :------------ | :-----------: | :------: | :-------------: | :---------: | :------------: |\n";
+$salida = `ghi`;
+$matches = [];
+preg_match('/# ([^ ]+)/', $salida, $matches);
+$repo = $matches[1];
 
 for ($row = 2; $row <= $highestRow; $row++) {
     $codigo      = $objWorksheet->getCell("A$row")->getValue();
@@ -27,24 +31,32 @@ for ($row = 2; $row <= $highestRow; $row++) {
 
     if ($incidencia === null) {
         // Crear la incidencia con ghi y actualizar el .xlsx
-        $mensaje = "($codigo) " . $corta . "\n" . $larga;
-        $hito = mb_substr($entrega, 1, 1);
-        // `ghi open -m $mensaje --claim -M $hito -L label`
+        $mensaje = "($codigo) $corta\n$larga";
+        $prioridadGhi = mb_strtolower($prioridad);
+        $tipoGhi = mb_strtolower($tipo);
+        $complejidadGhi = mb_strtolower($complejidad);
+        $entregaGhi = mb_substr($entrega, 1, 1);
+        $salida = `ghi open -m "$mensaje" --claim -L $prioridadGhi -L $tipoGhi -L $complejidadGhi -M $entregaGhi`;
+        $matches = [];
+        preg_match('/^#([0-9]+):/', $salida, $matches);
+        $incidencia = $matches[1];
+        $link = "https://github.com/$repo/issues/$incidencia";
     }
 
-    $requisitos .= "| **$codigo**     | **$corta**   |\n"
-                 . "| --------------: | :----------- |\n"
-                 . "| **Descripción** | $largaMd     |\n"
-                 . "| **Prioridad**   | $prioridad   |\n"
-                 . "| **Tipo**        | $tipo        |\n"
-                 . "| **Complejidad** | $complejidad |\n"
-                 . "| **Entrega**     | $entrega     |\n"
-                 . "| **Incidencia**  | $incidencia  |\n"
+    $requisitos .= "| **$codigo**     | **$corta**           |\n"
+                 . "| --------------: | :------------------- |\n"
+                 . "| **Descripción** | $largaMd             |\n"
+                 . "| **Prioridad**   | $prioridad           |\n"
+                 . "| **Tipo**        | $tipo                |\n"
+                 . "| **Complejidad** | $complejidad         |\n"
+                 . "| **Entrega**     | $entrega             |\n"
+                 . "| **Incidencia**  | [$incidencia]($link) |\n"
                  . "\n[]()\n\n";
 
-    $resumen .= "| (**$codigo**) $corta | $prioridad | $tipo | $complejidad | $entrega | $incidencia |\n";
+    $resumen .= "| (**$codigo**) $corta | $prioridad | $tipo | $complejidad | $entrega | [$incidencia]($link) |\n";
 
-    $objWorksheet->getCellByColumnAndRow(7, $row)->setValue('hola');
+    $objWorksheet->setCellValue("H$row", $incidencia);
+    $objWorksheet->getCell("H$row")->getHyperlink()->setUrl($link);
 }
 
 file_put_contents('requisitos.md', $requisitos, LOCK_EX);

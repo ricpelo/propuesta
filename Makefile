@@ -1,9 +1,23 @@
-.PHONY: all check req
+.PHONY: all check setup req
 
-all: check req
+all: req
 
 check:
 	./check-packages.sh
+
+setup:
+	ghi label mínimo
+	ghi label importante -c mediumpurple
+	ghi label opcional -c yellow
+	ghi label fácil
+	ghi label media
+	ghi label difícil
+	ghi label funcional
+	ghi label técnico
+	ghi label información
+	ghi milestone v1
+	ghi milestone v2
+	ghi milestone v3
 
 req:
 	php requisitos.php
