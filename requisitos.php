@@ -3,14 +3,15 @@
 
 require 'vendor/autoload.php';
 
+echo "Leyendo archivo requisitos.xslx...\n";
 PHPExcel_Settings::setLocale('es');
 $objPHPExcel = PHPExcel_IOFactory::load("requisitos.xlsx");
 $objWorksheet = $objPHPExcel->getSheet(0);
 $highestRow = $objWorksheet->getHighestDataRow(); // e.g. 10
 $highestColumn = $objWorksheet->getHighestDataColumn(); // e.g 'F'
 $highestColumnIndex = PHPExcel_Cell::columnIndexFromString($highestColumn); // e.g. 5
-$requisitos = '';
-$resumen = "\n\n### Cuadro resumen\n\n"
+$requisitos = "\n## Catálogo de requisitos\n\n";
+$resumen = "\n### Cuadro resumen\n\n"
          . "| **Requisito** | **Prioridad** | **Tipo** | **Complejidad** | **Entrega** | **Incidencia** |\n"
          . "| :------------ | :-----------: | :------: | :-------------: | :---------: | :------------: |\n";
 
@@ -34,7 +35,6 @@ for ($row = 2; $row <= $highestRow; $row++) {
     $complejidad = $objWorksheet->getCell("F$row")->getValue();
     $entrega     = $objWorksheet->getCell("G$row")->getValue();
     $incidencia  = $objWorksheet->getCell("H$row")->getValue();
-    $link = '';
 
     if ($incidencia === null) {
         // Crear la incidencia con ghi y actualizar el .xlsx
@@ -48,12 +48,18 @@ for ($row = 2; $row <= $highestRow; $row++) {
         $matches = [];
         if (preg_match('/^#([0-9]+):/', $salida, $matches) === 1) {
             $incidencia = $matches[1];
-            $link = "https://github.com/$repo/issues/$incidencia";
+            $objWorksheet->setCellValue("H$row", $incidencia);
+            $objWorksheet->getCell("H$row")->getHyperlink()->setUrl($link);
             echo "#$incidencia\n";
         } else {
             echo "\nError: no se ha podido crear la incidencia en GitHub.\n";
+            $link = '';
         }
+    } else {
+        echo "El requisito $codigo ya tiene asociada la incidencia #$incidencia.\n";
     }
+
+    $link = "https://github.com/$repo/issues/$incidencia";
 
     $requisitos .= "| **$codigo**     | **$corta**           |\n"
                  . "| --------------: | :------------------- |\n"
@@ -66,11 +72,10 @@ for ($row = 2; $row <= $highestRow; $row++) {
                  . "\n[]()\n\n";
 
     $resumen .= "| (**$codigo**) $corta | $prioridad | $tipo | $complejidad | $entrega | [$incidencia]($link) |\n";
-
-    $objWorksheet->setCellValue("H$row", $incidencia);
-    $objWorksheet->getCell("H$row")->getHyperlink()->setUrl($link);
 }
 
+echo "Generando archivo requisitos.md...\n";
 file_put_contents('requisitos.md', $requisitos . $resumen, LOCK_EX);
+echo "Actualizando archivo requisitos.xlsx...\n";
 $writer = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 $writer->save('requisitos.xlsx');

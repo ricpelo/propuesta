@@ -1,3 +1,6 @@
+
+## Catálogo de requisitos
+
 | **R01**     | **sdfsdfsdfsdfs**           |
 | --------------: | :------------------- |
 | **Descripción** | skdjfksjf skjf hskjfh kjsdh fkjs hkjh fdjksh fkjsdh fkjs dfkjs dfkj sjkd fsjk fkjs fkjs fkjs fjks fjks hfkjs fjks hfjks hfjks hfjks hfjk sfjks fjks hfjks hjkf hsjkfs jk             |
@@ -5,7 +8,7 @@
 | **Tipo**        | Técnico                |
 | **Complejidad** | Fácil         |
 | **Entrega**     | v1             |
-| **Incidencia**  | [53](https://github.com/ricpelo/pro/issues/53) |
+| **Incidencia**  | [58](https://github.com/ricpelo/pro/issues/58) |
 
 []()
 
@@ -16,7 +19,7 @@
 | **Tipo**        | Técnico                |
 | **Complejidad** | Fácil         |
 | **Entrega**     | v2             |
-| **Incidencia**  | [54](https://github.com/ricpelo/pro/issues/54) |
+| **Incidencia**  | [59](https://github.com/ricpelo/pro/issues/59) |
 
 []()
 
@@ -27,7 +30,7 @@
 | **Tipo**        | Información                |
 | **Complejidad** | Fácil         |
 | **Entrega**     | v3             |
-| **Incidencia**  | [55](https://github.com/ricpelo/pro/issues/55) |
+| **Incidencia**  | [60](https://github.com/ricpelo/pro/issues/60) |
 
 []()
 
@@ -38,7 +41,7 @@
 | **Tipo**        | Funcional                |
 | **Complejidad** | Media         |
 | **Entrega**     | v3             |
-| **Incidencia**  | [56](https://github.com/ricpelo/pro/issues/56) |
+| **Incidencia**  | [61](https://github.com/ricpelo/pro/issues/61) |
 
 []()
 
@@ -49,18 +52,17 @@
 | **Tipo**        | Información                |
 | **Complejidad** | Difícil         |
 | **Entrega**     | v3             |
-| **Incidencia**  | [57](https://github.com/ricpelo/pro/issues/57) |
+| **Incidencia**  | [62](https://github.com/ricpelo/pro/issues/62) |
 
 []()
-
 
 
 ### Cuadro resumen
 
 | **Requisito** | **Prioridad** | **Tipo** | **Complejidad** | **Entrega** | **Incidencia** |
 | :------------ | :-----------: | :------: | :-------------: | :---------: | :------------: |
-| (**R01**) sdfsdfsdfsdfs | Mínimo | Técnico | Fácil | v1 | [53](https://github.com/ricpelo/pro/issues/53) |
-| (**R02**) kdldjflgdfg | Importante | Técnico | Fácil | v2 | [54](https://github.com/ricpelo/pro/issues/54) |
-| (**R03**) sdfsfd | Importante | Información | Fácil | v3 | [55](https://github.com/ricpelo/pro/issues/55) |
-| (**R04**) sfsfsfd | Opcional | Funcional | Media | v3 | [56](https://github.com/ricpelo/pro/issues/56) |
-| (**R05**) xcvxcv | Opcional | Información | Difícil | v3 | [57](https://github.com/ricpelo/pro/issues/57) |
+| (**R01**) sdfsdfsdfsdfs | Mínimo | Técnico | Fácil | v1 | [58](https://github.com/ricpelo/pro/issues/58) |
+| (**R02**) kdldjflgdfg | Importante | Técnico | Fácil | v2 | [59](https://github.com/ricpelo/pro/issues/59) |
+| (**R03**) sdfsfd | Importante | Información | Fácil | v3 | [60](https://github.com/ricpelo/pro/issues/60) |
+| (**R04**) sfsfsfd | Opcional | Funcional | Media | v3 | [61](https://github.com/ricpelo/pro/issues/61) |
+| (**R05**) xcvxcv | Opcional | Información | Difícil | v3 | [62](https://github.com/ricpelo/pro/issues/62) |

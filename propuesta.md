@@ -25,5 +25,3 @@ Aspecto, función o tecnología novedosa o innovadora no tratada directamente
 en clase y que será necesario investigar para desarrollar adecuadamente el
 Proyecto.
 
-## Catálogo de requisitos
-
