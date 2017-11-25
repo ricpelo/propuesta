@@ -9,6 +9,10 @@ $objWorksheet = $objPHPExcel->getSheet(0);
 $highestRow = $objWorksheet->getHighestDataRow(); // e.g. 10
 $highestColumn = $objWorksheet->getHighestDataColumn(); // e.g 'F'
 $highestColumnIndex = PHPExcel_Cell::columnIndexFromString($highestColumn); // e.g. 5
+$requisitos = '';
+$resumen = "\n\n### Cuadro resumen\n\n"
+         . "| **Requisito** | **Prioridad** | **Tipo** | **Complejidad** | **Entrega ** | **Incidencia** |\n"
+         . "| :------------ | :-----------: | :------: | :-------------: | :----------: | :------------: |\n";
 
 for ($row = 2; $row <= $highestRow; $row++) {
     $codigo      = $objWorksheet->getCell("A$row")->getValue();
@@ -27,20 +31,23 @@ for ($row = 2; $row <= $highestRow; $row++) {
         $hito = mb_substr($entrega, 1, 1);
         // `ghi open -m $mensaje --claim -M $hito -L label`
     }
-    
 
-    echo "| **$codigo**     | **$corta**   |" . PHP_EOL;
-    echo "| --------------: | :----------- |" . PHP_EOL;
-    echo "| **Descripción** | $largaMd     |" . PHP_EOL;
-    echo "| **Prioridad**   | $prioridad   |" . PHP_EOL;
-    echo "| **Tipo**        | $tipo        |" . PHP_EOL;
-    echo "| **Complejidad** | $complejidad |" . PHP_EOL;
-    echo "| **Entrega**     | $entrega     |" . PHP_EOL;
-    echo "| **Incidencia**  | $incidencia  |" . PHP_EOL;
-    echo "\n[]()\n\n";
+    $requisitos .= "| **$codigo**     | **$corta**   |\n"
+                 . "| --------------: | :----------- |\n"
+                 . "| **Descripción** | $largaMd     |\n"
+                 . "| **Prioridad**   | $prioridad   |\n"
+                 . "| **Tipo**        | $tipo        |\n"
+                 . "| **Complejidad** | $complejidad |\n"
+                 . "| **Entrega**     | $entrega     |\n"
+                 . "| **Incidencia**  | $incidencia  |\n"
+                 . "\n[]()\n\n";
+
+    $resumen .= "| (**$codigo**) $corta | $prioridad | $tipo | $complejidad | $entrega | $incidencia |\n";
 
     $objWorksheet->getCellByColumnAndRow(7, $row)->setValue('hola');
 }
 
+file_put_contents('requisitos.md', $requisitos, LOCK_EX);
+file_put_contents('resumen.md', $resumen, LOCK_EX);
 $writer = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 $writer->save('requisitos2.xlsx');

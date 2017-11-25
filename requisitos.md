@@ -5,6 +5,7 @@
 | **Tipo**        | Técnico        |
 | **Complejidad** | Fácil |
 | **Entrega**     | v1     |
+| **Incidencia**  |   |
 
 []()
 
@@ -15,6 +16,7 @@
 | **Tipo**        | Técnico        |
 | **Complejidad** | Fácil |
 | **Entrega**     | v2     |
+| **Incidencia**  |   |
 
 []()
 
@@ -25,6 +27,7 @@
 | **Tipo**        | Información        |
 | **Complejidad** | Fácil |
 | **Entrega**     | v3     |
+| **Incidencia**  |   |
 
 []()
 
@@ -35,6 +38,7 @@
 | **Tipo**        | Funcional        |
 | **Complejidad** | Media |
 | **Entrega**     | v3     |
+| **Incidencia**  |   |
 
 []()
 
@@ -45,6 +49,7 @@
 | **Tipo**        | Información        |
 | **Complejidad** | Difícil |
 | **Entrega**     | v3     |
+| **Incidencia**  |   |
 
 []()
 
