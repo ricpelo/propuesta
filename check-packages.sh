@@ -18,3 +18,9 @@ then
     echo "Instalando $PKG (puede tardar bastante)..."
     sudo apt install $PKG
 fi
+
+if [ ! -d vendor ]
+then
+    echo "Ejecutando composer install..."
+    composer install
+fi
