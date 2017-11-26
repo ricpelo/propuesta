@@ -8,7 +8,10 @@ $issues = isset($argv[1]) && $argv[1] === '-i';
 if ($issues) {
     echo "Se ha indicado la opción '-i'. Se actualizarán las incidencias en\n";
     echo "GitHub y se registrarán los enlaces correspondientes en los archivos\n";
-    echo "'requisitos.md' y 'requisitos.xlsx'. ¿Deseas continuar? (s/N): ";
+    echo "'requisitos.md' y 'requisitos.xlsx' (en cambio, si el archivo\n";
+    echo "'requisitos.xlsx' contiene ya las incidencias creadas, no se\n";
+    echo "volverán a crear ni se modificarán en GitHub).\n\n";
+    echo "¿Deseas continuar? (s/N): ";
     $sn = '';
     fscanf(STDIN, "%s", $sn);
     if ($sn !== 's' && $sn !== 'S') {
