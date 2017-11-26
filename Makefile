@@ -14,8 +14,7 @@ setup:
 	ghi label información
 
 check:
-	./check-pandoc.sh
-	./check-latex.sh
+	./check-packages.sh
 	./check-vendor.sh
 
 req:
