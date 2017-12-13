@@ -10,8 +10,6 @@
 | **Entrega**     | v1             |
 
 
-[]()
-
 | **R02**     | **kdldjflgdfg**           |
 | --------------: | :------------------- |
 | **Descripción** | sdlksdljkfsldjfsd             |
@@ -20,8 +18,6 @@
 | **Complejidad** | Fácil         |
 | **Entrega**     | v2             |
 
-
-[]()
 
 | **R03**     | **sdfsfd**           |
 | --------------: | :------------------- |
@@ -32,8 +28,6 @@
 | **Entrega**     | v3             |
 
 
-[]()
-
 | **R04**     | **sfsfsfd**           |
 | --------------: | :------------------- |
 | **Descripción** | jk34jlk4n,lkjlksdflksdf             |
@@ -43,8 +37,6 @@
 | **Entrega**     | v3             |
 
 
-[]()
-
 | **R05**     | **xcvxcv**           |
 | --------------: | :------------------- |
 | **Descripción** | sdkfjklsdfjldksf - sdlkfjlksdjfldksjflksjfdss - slkdjflksjflksjflksjkljfksldjfldks sldkjflskdjfdlskjflksdjflkdsjflkjslkfjslkjfdlskjflsjklfdjslkjlskjdflks klsdjfkljsdlkfjskldf sdklfjklsdjfklsdjflksdjfklsdjkl lñklllllllllllllllllllllllqweqweqweqew             |
@@ -53,8 +45,6 @@
 | **Complejidad** | Difícil         |
 | **Entrega**     | v3             |
 
-
-[]()
 
 
 ## Cuadro resumen
