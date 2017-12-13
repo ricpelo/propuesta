@@ -23,7 +23,7 @@ fi
 if ! echo $LISTA | grep -qs "asciidoctor-pdf "
 then
     echo "Instalando asciidoctor-pdf..."
-    sudo gem install -v 1.5.0.alpha.13 --pre
+    sudo gem install asciidoctor-pdf -v 1.5.0.alpha.13 --pre
 fi
 
 PKG="texlive-full"
