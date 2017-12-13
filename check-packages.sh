@@ -12,6 +12,20 @@ then
     sudo apt -f install
 fi
 
+LISTA=$(gem list --local)
+
+if ! echo $LISTA | grep -qs "asciidoctor "
+then
+    echo "Instalando asciidoctor..."
+    sudo gem install asciidoctor
+fi
+
+if ! echo $LISTA | grep -qs "asciidoctor-pdf "
+then
+    echo "Instalando asciidoctor-pdf..."
+    sudo gem install -v 1.5.0.alpha.13 --pre
+fi
+
 PKG="texlive-full"
 if ! dpkg -s $PKG > /dev/null 2>&1
 then
