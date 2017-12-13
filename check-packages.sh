@@ -14,17 +14,14 @@ fi
 
 LISTA=$(gem list --local)
 
-if ! echo $LISTA | grep -qs "asciidoctor "
-then
-    echo "Instalando asciidoctor..."
-    sudo gem install asciidoctor
-fi
-
-if ! echo $LISTA | grep -qs "asciidoctor-pdf "
-then
-    echo "Instalando asciidoctor-pdf..."
-    sudo gem install asciidoctor-pdf -v 1.5.0.alpha.13 --pre
-fi
+for p in asciidoctor asciidoctor-pdf
+do
+    if ! echo $LISTA | grep -qs "$p "
+    then
+        echo "Instalando $p..."
+        sudo gem install $p --pre
+    fi
+done
 
 PKG="texlive-full"
 if ! dpkg -s $PKG > /dev/null 2>&1
