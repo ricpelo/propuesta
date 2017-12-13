@@ -93,8 +93,7 @@ for ($row = 2; $row <= $highestRow; $row++) {
                  . "| **Tipo**        | $tipo                |\n"
                  . "| **Complejidad** | $complejidad         |\n"
                  . "| **Entrega**     | $entrega             |\n"
-                 . ($issues ? "| **Incidencia**  | [$incidencia]($link) |" : '') . "\n"
-                 . "\n[]()\n\n";
+                 . ($issues ? "| **Incidencia**  | [$incidencia]($link) |" : '') . "\n\n";
 
     $resumen .= "| (**$codigo**) $corta | $prioridad | $tipo | $complejidad | $entrega |"
               . ($issues ? " [$incidencia]($link) |" : '') . "\n";
