@@ -1,17 +1,14 @@
-.PHONY: all check req
+.PHONY: all check pro
 
-all: check req
+all: check pro
 
 check:
 	./check-packages.sh
 	./check-vendor.sh
 
-req:
+pro:
 	php requisitos.php
 	pandoc -s propuesta.md requisitos.md -o pro.adoc
-	echo ":lang: es\n:toc:\n:toc-title: Tabla de contenidos\n:sectnums:\n\n" | cat - pro.adoc > propuesta.adoc
-	sed -i 's/^\[cols=">,<",options="header",\]$\/[width="100%",cols=">20%,<80%",options="header",\]/' propuesta.adoc
-	sed -i 's/^\[width="51%".*$\/[width="100%",cols=">20%,<80%",options="header",\]/' propuesta.adoc
-	sed -i 's/^\[width="[2-9].*$\/[cols="<3%,^,^,^,^",options="header",]/' propuesta.adoc
+	./replace.sh
 	asciidoctor-pdf propuesta.adoc
-	rm pro.adoc propuesta.adoc
+	rm -f pro.adoc propuesta.adoc
