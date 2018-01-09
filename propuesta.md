@@ -4,16 +4,27 @@
 
 # Descripción general del proyecto
 Lugar para compartir y descargar torrents.
-Esta aplicación permite que los usuarios compartan torrents.
+Esta aplicación permite que los usuarios compartan torrents de calidad, existiendo para ello sistemas de votaciones por la comunidad hacia los torrents y usuarios que los comparten.
 
 ## Funcionalidad principal de la aplicación
 Los usuarios serán quienes suban sus torrents.
-Cada torrent llevará una suma de verificación con la que validar la descarga.
-Existe un sistema de votación sobre la calidad de cada torrent.
+
+Zona de petición de torrent por categorías.
+
+Existe un sistema de votación sobre la calidad de cada torrent y usuario.
+
 Cada torrent tiene una función de recomendación.
+
 Asignar sistema de valoración a los usuarios que comparten torrents según la cantidad de ellos.
 
-Podrán crear cuenta en el sistema y añadir sus archivos por categorías principales:
+Cada torrent llevará una suma de verificación con la que validar la descarga.
+
+Los visitantes podrán crear cuenta en el sistema.
+
+Sistema de roles según la cantidad de subidas y las votaciones positivas.
+
+Los torrents compartidos se dividen por categorías principales:
+
 - Máquinas Virtuales
 - Guías
 - Chuletas
@@ -25,10 +36,13 @@ Podrán crear cuenta en el sistema y añadir sus archivos por categorías princi
 - Complementos de aplicaciones (Plugins, brochas, pack de idiomas...)
 
 ## Objetivos generales
-- Subir y descargar torrents
-- Valorar torrents existentes
+- Subir y descargar torrents de calidad.
+- Valorar usuarios y torrents existentes.
+- Demandar torrent de algo que aún no exista.
 
 # Elemento de innovación
-Aspecto, función o tecnología novedosa o innovadora no tratada directamente
-en clase y que será necesario investigar para desarrollar adecuadamente el
-Proyecto.
+(Temporalmente, planteando aún)
+
+- Consultar tracker de torrent en ajax tras cargar la página para conocer la cantidad de semillas.
+- Mostrar usuarios conectados a la aplicación.
+
