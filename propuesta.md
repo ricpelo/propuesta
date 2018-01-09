@@ -45,4 +45,5 @@ Los torrents compartidos se dividen por categorías principales:
 
 - Consultar tracker de torrent en ajax tras cargar la página para conocer la cantidad de semillas.
 - Mostrar usuarios conectados a la aplicación.
+- Estadísticas en backend para el administrador tener control del sitio, generando gráficos muy visuales para conocer el estado de un simple vistazo. Esto tendría que investigar librerías para convertir los datos de BD en gráficos dinámicamente.
 
