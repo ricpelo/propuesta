@@ -14,7 +14,7 @@ fi
 
 LISTA=$(gem list --local)
 
-for p in asciidoctor asciidoctor-pdf
+for p in concurrent-ruby asciidoctor asciidoctor-pdf
 do
     if ! echo $LISTA | grep -qs "$p "
     then

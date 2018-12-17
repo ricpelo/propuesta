@@ -10,12 +10,13 @@ if (file_exists('vendor')) {
 $issues = isset($argv[1]) && $argv[1] === '-i';
 
 if ($issues) {
-    echo "Se ha indicado la opción '-i'. Se actualizarán las incidencias en\n";
-    echo "GitHub y se registrarán los enlaces correspondientes en los archivos\n";
-    echo "'requisitos.md' y 'requisitos.xlsx' (en cambio, si el archivo\n";
-    echo "'requisitos.xlsx' contiene ya las incidencias creadas, no se\n";
+    echo "\nSe ha indicado la opción '\033[1;28m-i\033[0m'. Se actualizarán las incidencias\n";
+    echo "en GitHub y se anotarán los enlaces correspondientes en los\n";
+    echo "archivos '\033[1;28mrequisitos.md\033[0m' y '\033[1;28mrequisitos.xls\033[0m' (en cambio, si este\n";
+    echo "último contiene ya anotadas las incidencias creadas, no se\n";
     echo "volverán a crear ni se modificarán en GitHub).\n\n";
-    echo "¿Deseas continuar? (s/N): ";
+    echo "\033[1;31m*** ESTE PROCESO ES IRREVERSIBLE Y NO SE PUEDE INTERRUMPIR ***\033[0m\n\n";
+    echo "\033[1;28m¿Deseas continuar? (s/N): \033[0m";
     $sn = '';
     fscanf(STDIN, "%s", $sn);
     if ($sn !== 's' && $sn !== 'S') {
@@ -23,9 +24,9 @@ if ($issues) {
     }
 }
 
-echo "Leyendo archivo requisitos.xlsx...\n";
+echo "Leyendo archivo requisitos.xls...\n";
 \PhpOffice\PhpSpreadsheet\Settings::setLocale('es');
-$objPHPExcel = \PhpOffice\PhpSpreadsheet\IOFactory::load("requisitos.xlsx");
+$objPHPExcel = \PhpOffice\PhpSpreadsheet\IOFactory::load("requisitos.xls");
 $objWorksheet = $objPHPExcel->getSheet(0);
 $highestRow = $objWorksheet->getHighestDataRow(); // e.g. 10
 $highestColumn = $objWorksheet->getHighestDataColumn(); // e.g 'F'
@@ -50,7 +51,7 @@ if ($issues) {
 }
 
 for ($row = 2; $row <= $highestRow; $row++) {
-    if (($row - 1) % 10 === 0) {
+    if ($issues && ($row - 1) % 10 === 0) {
         echo "Deteniendo la ejecución por 10 segundos para evitar exceso de tasa...";
         sleep(10);
         echo "\n";
@@ -58,8 +59,11 @@ for ($row = 2; $row <= $highestRow; $row++) {
     echo '(' . ($row - 1) . '/' . ($highestRow - 1) . ') ';
     $codigo      = $objWorksheet->getCell("A$row")->getValue();
     $corta       = $objWorksheet->getCell("B$row")->getValue();
+    $cortaMd     = $corta;
+    $corta       = preg_replace('/`/u', '\`', $corta);
     $larga       = $objWorksheet->getCell("C$row")->getValue();
     $largaMd     = preg_replace('/\n/u', ' ', $larga);
+    $larga       = preg_replace('/`/u', '\`', $larga);
     $prioridad   = $objWorksheet->getCell("D$row")->getValue();
     $tipo        = $objWorksheet->getCell("E$row")->getValue();
     $complejidad = $objWorksheet->getCell("F$row")->getValue();
@@ -110,7 +114,7 @@ for ($row = 2; $row <= $highestRow; $row++) {
         $link = "https://github.com/$repo/issues/$incidencia";
     }
 
-    $requisitos .= "| **$codigo**     | **$corta**           |\n"
+    $requisitos .= "| **$codigo**     | **$cortaMd**         |\n"
                  . "| --------------: | :------------------- |\n"
                  . "| **Descripción** | $largaMd             |\n"
                  . "| **Prioridad**   | $prioridad           |\n"
@@ -119,15 +123,15 @@ for ($row = 2; $row <= $highestRow; $row++) {
                  . "| **Entrega**     | $entrega             |\n"
                  . ($issues ? "| **Incidencia**  | [$incidencia]($link) |" : '') . "\n\n";
 
-    $resumen .= "| (**$codigo**) $corta | $prioridad | $tipo | $complejidad | $entrega |"
+    $resumen .= "| (**$codigo**) $cortaMd | $prioridad | $tipo | $complejidad | $entrega |"
               . ($issues ? " [$incidencia]($link) |" : '') . "\n";
 }
 
-echo "Generando archivo requisitos.md...\n";
+echo "\nGenerando archivo requisitos.md...\n";
 file_put_contents('requisitos.md', $requisitos . $resumen, LOCK_EX);
 
 if ($issues) {
-    echo "Actualizando archivo requisitos.xlsx...\n";
-    $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($objPHPExcel, 'Xlsx');
-    $writer->save('requisitos.xlsx');
+    echo "Actualizando archivo requisitos.xls...\n";
+    $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xls($objPHPExcel);
+    $writer->save('requisitos.xls');
 }

@@ -8,7 +8,7 @@ check:
 
 pro:
 	php requisitos.php
-	pandoc -s propuesta.md requisitos.md -o pro.adoc
+	pandoc -f markdown-smart -s propuesta.md requisitos.md -o pro.adoc
 	./replace.sh
 	asciidoctor-pdf propuesta.adoc
 	rm -f pro.adoc propuesta.adoc
