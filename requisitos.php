@@ -18,7 +18,7 @@ if ($issues) {
     echo "\033[1;31m*** ESTE PROCESO ES IRREVERSIBLE Y NO SE PUEDE INTERRUMPIR ***\033[0m\n\n";
     echo "\033[1;28m¿Deseas continuar? (s/N): \033[0m";
     $sn = '';
-    fscanf(STDIN, "%s", $sn);
+    fscanf(STDIN, '%s', $sn);
     if ($sn !== 's' && $sn !== 'S') {
         exit(1);
     }
@@ -26,7 +26,7 @@ if ($issues) {
 
 echo "Leyendo archivo requisitos.xls...\n";
 \PhpOffice\PhpSpreadsheet\Settings::setLocale('es');
-$objPHPExcel = \PhpOffice\PhpSpreadsheet\IOFactory::load("requisitos.xls");
+$objPHPExcel = \PhpOffice\PhpSpreadsheet\IOFactory::load('requisitos.xls');
 $objWorksheet = $objPHPExcel->getSheet(0);
 $highestRow = $objWorksheet->getHighestDataRow(); // e.g. 10
 $highestColumn = $objWorksheet->getHighestDataColumn(); // e.g 'F'
@@ -34,9 +34,9 @@ $highestColumnIndex = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::columnIndexFrom
 $requisitos = "\n# Catálogo de requisitos\n\n";
 $resumen = "\n## Cuadro resumen\n\n"
          . '| **Requisito** | **Prioridad** | **Tipo** | **Complejidad** | **Entrega** |'
-         . ($issues ? " **Incidencia** |" : '') . "\n"
+         . ($issues ? ' **Incidencia** |' : '') . "\n"
          . '| :------------ | :-----------: | :------: | :-------------: | :---------: |'
-         . ($issues ? " :------------: |" : '') . "\n";
+         . ($issues ? ' :------------: |' : '') . "\n";
 
 $salida = `ghi`;
 $matches = [];
@@ -52,7 +52,7 @@ if ($issues) {
 
 for ($row = 2; $row <= $highestRow; $row++) {
     if ($issues && ($row - 1) % 10 === 0) {
-        echo "Deteniendo la ejecución por 10 segundos para evitar exceso de tasa...";
+        echo 'Deteniendo la ejecución por 10 segundos para evitar exceso de tasa...';
         sleep(10);
         echo "\n";
     }
