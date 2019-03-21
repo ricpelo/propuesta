@@ -4,7 +4,7 @@ all: check pro
 
 check:
 	@./check-pandoc.sh
-	@./check-vendor.sh
+	@[ -d vendor ] || composer install
 	@bundle install --path vendor/bundle
 
 pro:
