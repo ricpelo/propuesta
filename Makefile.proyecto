@@ -1,4 +1,4 @@
 .PHONY: all
 
 all:
-	php requisitos.php -i
+	@php requisitos.php -i || true

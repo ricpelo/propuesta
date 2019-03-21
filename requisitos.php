@@ -38,10 +38,15 @@ $highestRow = $objWorksheet->getHighestDataRow(); // e.g. 10
 $highestColumn = $objWorksheet->getHighestDataColumn(); // e.g 'F'
 $highestColumnIndex = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::columnIndexFromString($highestColumn); // e.g. 5
 
+$prioridades = ['Mínimo', 'Importante', 'Opcional'];
+$tipos = ['Funcional', 'Técnico', 'Información'];
+$complejidades = ['Fácil', 'Media', 'Difícil'];
+$entregas = ['v1', 'v2', 'v3'];
+
 echo "\033[1;28m# Comprobando archivo requisitos.xls...\033[0m\n";
 
 for ($fallo = 0, $row = 2; $row <= $highestRow; $row++) {
-    echo '(' . ($row - 1) . '/' . ($highestRow - 1) . ') ';
+    echo "\r(" . ($row - 1) . '/' . ($highestRow - 1) . ') ';
     $codigo      = $objWorksheet->getCell("A$row")->getValue();
     $prioridad   = $objWorksheet->getCell("D$row")->getValue();
     $tipo        = $objWorksheet->getCell("E$row")->getValue();
@@ -52,25 +57,29 @@ for ($fallo = 0, $row = 2; $row <= $highestRow; $row++) {
     if (!preg_match('/R[1-9]\d*/u', $codigo)) {
         $fallo = fallo("El código '$codigo' es incorrecto (celda A$row).\n  Debe empezar por R y seguir con un número que no empiece por 0.");
     }
-    if (!in_array($prioridad, ['Mínimo', 'Importante', 'Opcional'])) {
-        $fallo = fallo("Error: La prioridad '$prioridad' es incorrecta (celda D$row).");
+    if (!in_array($prioridad, $prioridades)) {
+        $fallo = fallo("La prioridad '$prioridad' es incorrecta (celda D$row). Debe ser: "
+                     . implode(', ', $prioridades));
     }
-    if (!in_array($tipo, ['Funcional', 'Técnico', 'Información'])) {
-        $fallo = fallo("El tipo '$tipo' es incorrecto (celda E$row).");
+    if (!in_array($tipo, $tipos)) {
+        $fallo = fallo("El tipo '$tipo' es incorrecto (celda E$row). Debe ser: "
+                     . implode(', ', $tipos));
     }
-    if (!in_array($complejidad, ['Fácil', 'Media', 'Difícil'])) {
-        $fallo = fallo("La complejidad '$complejidad' es incorrecta (celda F$row).");
+    if (!in_array($complejidad, $complejidades)) {
+        $fallo = fallo("La complejidad '$complejidad' es incorrecta (celda F$row). Debe ser: "
+                     . implode(', ', $complejidades));
     }
-    if (!in_array($entrega, ['v1', 'v2', 'v3'])) {
-        $fallo = fallo("La entrega '$entrega' es incorrecta (celda G$row).");
+    if (!in_array($entrega, $entregas)) {
+        $fallo = fallo("La entrega '$entrega' es incorrecta (celda G$row). Debe ser: "
+                     . implode(', ', $entregas));
     }
     if ($incidencia != '' && !ctype_digit((string) $incidencia)) {
-        $fallo = fallo("La incidencia '$incidencia' es incorrecta (celda H$row).");
+        $fallo = fallo("La incidencia '$incidencia' es incorrecta (celda H$row). Debe ser un número entero.");
     }
 }
 
 if ($fallo == 0) {
-    echo "\n\033[1;28m# No se han encontrado errores en el archivo 'requisitos.xls'.\033[0m\n";
+    echo "\r\033[1;28m# No se han encontrado errores en el archivo 'requisitos.xls'.\033[0m\n";
     if ($check) {
         exit(0);
     }
@@ -85,8 +94,50 @@ if ($issues) {
         $login = $client->currentUser()->show()['login'];
         $repo = trim(`basename -s .git $(git remote get-url origin)`);
     } catch (\Github\Exception\RuntimeException $e) {
-        fallo("No se ha podido encontrar el repositorio en GitHub.");
+        fallo('No se ha podido encontrar el repositorio en GitHub.');
         exit(1);
+    }
+
+    $projects = $client->api('repo')->projects()->configure()->all($login, $repo);
+
+    switch (count($projects)) {
+        case 0:
+            echo '# Creando el nuevo proyecto en GitHub Projects...';
+            $project = $client->api('repo')->projects()->configure()->create($login, $repo, ['name' => 'Proyecto']);
+            echo " #{$project['number']}\n";
+            break;
+        case 1:
+            $project = $projects[0];
+            echo "# Usando el proyecto #{$project['number']} ya existente...\n";
+            break;
+        default:
+            fallo("No puede haber más de un proyecto en GitHub Projects para este repositorio.\n  Visita https://github.com/$login/$repo/projects y elimínalos todos o deja sólo uno.");
+            exit(1);
+    }
+
+    $columns = $client->api('repo')->projects()->columns()->configure()->all($project['id']);
+
+    switch (count($columns)) {
+        case 0:
+            echo "# Creando columnas en el proyecto...\n";
+            $column = $client->api('repo')->projects()->columns()->configure()->create($project['id'], ['name' => 'To Do']);
+            $client->api('repo')->projects()->columns()->configure()->create($project['id'], ['name' => 'In Progress']);
+            $client->api('repo')->projects()->columns()->configure()->create($project['id'], ['name' => 'Done']);
+            break;
+        default:
+            foreach ($columns as $col) {
+                if ($col['name'] === 'To Do') {
+                    $column = $col;
+                    break;
+                }
+            }
+            if (isset($column)) {
+                echo "# Usando columnas ya existentes en el proyecto...\n";
+            } else {
+                fallo("El proyecto existente no es válido (no tiene una columna 'To Do').\n  Elimínalo en https://github.com/$login/$repo/projects\n  o crea otro con la plantilla 'Automated kanban'.");
+                exit(1);
+            }
+            break;
     }
 
     $milestones = $client->api('issue')->milestones()->all($login, $repo);
@@ -103,6 +154,7 @@ if ($issues) {
         }
     }
 
+    $labels = array_column($client->api('issue')->labels()->all($login, $repo), 'color', 'name');
     $etiquetas = [
         'mínimo' => 'e99695',
         'importante' => '9370db',
@@ -115,38 +167,16 @@ if ($issues) {
         'información' => '0052cc',
     ];
 
-    $labels = array_column($client->api('issue')->labels()->all($login, $repo), 'name');
-
     foreach ($etiquetas as $name => $color) {
-        if (in_array($name, $labels)) {
-            echo "# Actualizando el color de la etiqueta $name...\n";
-            $client->api('issue')->labels()->update($login, $repo, $name, $name, $color);
+        if (isset($labels[$name])) {
+            if ($labels[$name] !== $color) {
+                echo "# Actualizando el color de la etiqueta $name...\n";
+                $client->api('issue')->labels()->update($login, $repo, $name, $name, $color);
+            }
         } else {
             echo "# Creando la etiqueta $name...\n";
             $client->api('issue')->labels()->create($login, $repo, ['name' => $name, 'color' => $color]);
         }
-    }
-
-    $projects = $client->api('repo')->projects()->configure()->all($login, $repo);
-
-    if (count($projects) == 0) {
-        echo "# Creando el nuevo proyecto en GitHub Projects...";
-        $project = $client->api('repo')->projects()->configure()->create($login, $repo, ['name' => 'Proyecto']);
-        echo " #{$project['number']}\n";
-    } else {
-        $project = $projects[0];
-        echo "# Usando el proyecto #{$project['number']} ya existente...\n";
-    }
-
-    $columns = $client->api('repo')->projects()->columns()->configure()->all($project['id']);
-    if (count($columns) == 0) {
-        echo "# Creando columnas en el proyecto...\n";
-        $column = $client->api('repo')->projects()->columns()->configure()->create($project['id'], ['name' => 'To Do']);
-        $client->api('repo')->projects()->columns()->configure()->create($project['id'], ['name' => 'In Progress']);
-        $client->api('repo')->projects()->columns()->configure()->create($project['id'], ['name' => 'Done']);
-    } else {
-        $column = $columns[0];
-        echo "# Usando columnas ya existentes en el proyecto...\n";
     }
 }
 
@@ -160,11 +190,6 @@ $resumen = "\n## Cuadro resumen\n\n"
 echo "\033[1;28m# Leyendo archivo requisitos.xls...\033[0m\n";
 
 for ($row = 2; $row <= $highestRow; $row++) {
-    if ($issues && ($row - 1) % 10 === 0) {
-        echo '# Deteniendo la ejecución por 5 segundos para no exceder el límite de tasa...';
-        sleep(5);
-        echo "\n";
-    }
     echo '(' . ($row - 1) . '/' . ($highestRow - 1) . ') ';
     $codigo      = $objWorksheet->getCell("A$row")->getValue();
     $corta       = $objWorksheet->getCell("B$row")->getValue();
@@ -181,6 +206,11 @@ for ($row = 2; $row <= $highestRow; $row++) {
 
     if ($issues) {
         if ($incidencia === null) {
+            if (($row - 1) % 10 === 0) {
+                echo '# Deteniendo la ejecución por 5 segundos para no exceder el límite de tasa...';
+                sleep(5);
+                echo "\n";
+            }
             echo "Generando incidencia para $codigo en GitHub...";
             $issue = $client->api('issue')->create($login, $repo, [
                 'title' => $corta,
