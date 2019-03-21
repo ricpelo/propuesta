@@ -1,5 +1,7 @@
 {
     "require": {
-        "phpoffice/phpspreadsheet": "^1.1"
+        "phpoffice/phpspreadsheet": "^1.1",
+        "knplabs/github-api": "^2.11",
+        "php-http/guzzle6-adapter": "^1.1"
     }
 }

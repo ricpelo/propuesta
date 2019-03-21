@@ -1,7 +1,7 @@
 
 # Catálogo de requisitos
 
-| **R01**     | **Requisitos como incidencias**         |
+| **R1**     | **Requisitos como incidencias**         |
 | --------------: | :------------------- |
 | **Descripción** | Requisitos perfectamente definidos y convertidos en incidencias (issues) de GitHub.             |
 | **Prioridad**   | Mínimo           |
@@ -10,7 +10,7 @@
 | **Entrega**     | v1             |
 
 
-| **R02**     | **Código fuente**         |
+| **R2**     | **Código fuente**         |
 | --------------: | :------------------- |
 | **Descripción** | Código fuente publicado en GitHub.             |
 | **Prioridad**   | Mínimo           |
@@ -19,7 +19,7 @@
 | **Entrega**     | v1             |
 
 
-| **R03**     | **Estilo del código**         |
+| **R3**     | **Estilo del código**         |
 | --------------: | :------------------- |
 | **Descripción** | Estilo del código según las normas internas de Yii2 para el código y para las plantillas de las vistas.             |
 | **Prioridad**   | Mínimo           |
@@ -28,7 +28,7 @@
 | **Entrega**     | v1             |
 
 
-| **R04**     | **Tres lanzamientos**         |
+| **R4**     | **Tres lanzamientos**         |
 | --------------: | :------------------- |
 | **Descripción** | Tres lanzamientos (releases) etiquetados en el repositorio como v1, v2 y v3.             |
 | **Prioridad**   | Mínimo           |
@@ -37,7 +37,7 @@
 | **Entrega**     | v1             |
 
 
-| **R05**     | **README.md**         |
+| **R5**     | **README.md**         |
 | --------------: | :------------------- |
 | **Descripción** | README.md en el directorio raíz con la descripción principal del proyecto.             |
 | **Prioridad**   | Mínimo           |
@@ -46,7 +46,7 @@
 | **Entrega**     | v1             |
 
 
-| **R06**     | **Documentación**         |
+| **R6**     | **Documentación**         |
 | --------------: | :------------------- |
 | **Descripción** | Documentación generada con yii2-apidoc y publicada en GitHub Pages a partir del contenido del directorio /docs:  - Contenido:   - Guía general.   - API. - Formato: GitHub flavored Markdown (fuente) y HTML (resultado). - Usar make docs para crear la documentación. - Opcional: conversión a PDF.             |
 | **Prioridad**   | Mínimo           |
@@ -55,7 +55,7 @@
 | **Entrega**     | v1             |
 
 
-| **R07**     | **Incidencias en GitHub**         |
+| **R7**     | **Incidencias en GitHub**         |
 | --------------: | :------------------- |
 | **Descripción** | Administración y resolución de todas las incidencias notificadas en GitHub.             |
 | **Prioridad**   | Mínimo           |
@@ -64,7 +64,7 @@
 | **Entrega**     | v1             |
 
 
-| **R08**     | **Etiquetas e hitos**         |
+| **R8**     | **Etiquetas e hitos**         |
 | --------------: | :------------------- |
 | **Descripción** | Usar etiquetas e hitos:  - Etiquetas: mínimo, importante, opcional (además de las ya existentes). - Hitos: v1, v2, v3 (con fechas de entrega aproximadas).             |
 | **Prioridad**   | Mínimo           |
@@ -73,7 +73,7 @@
 | **Entrega**     | v1             |
 
 
-| **R09**     | **Rama master**         |
+| **R9**     | **Rama master**         |
 | --------------: | :------------------- |
 | **Descripción** | La rama master debe reflejar en todo momento el estado más estable de la aplicación, de manera que:  - La rama master no debe contener bugs conocidos. - El desarrollo deberá hacerse en otras ramas creadas a tal efecto (una distinta por cada funcionalidad) y se irán combinado con la master una vez que se haya implementado la funcionalidad correspondiente. - La release actual en Heroku corresponderá siempre con el último commit de la rama master (usar los deploys automáticos de Heroku conectando la aplicación de Heroku con la rama master de GitHub).              |
 | **Prioridad**   | Mínimo           |
@@ -348,41 +348,41 @@
 
 | **Requisito** | **Prioridad** | **Tipo** | **Complejidad** | **Entrega** |
 | :------------ | :-----------: | :------: | :-------------: | :---------: |
-| (**R01**) Requisitos como incidencias | Mínimo | Técnico | Fácil | v1 |
-| (**R02**) Código fuente | Mínimo | Técnico | Fácil | v1 |
-| (**R03**) Estilo del código | Mínimo | Técnico | Fácil | v1 |
-| (**R04**) Tres lanzamientos | Mínimo | Técnico | Fácil | v1 |
-| (**R05**) README.md | Mínimo | Técnico | Fácil | v1 |
-| (**R06**) Documentación | Mínimo | Técnico | Fácil | v1 |
-| (**R07**) Incidencias en GitHub | Mínimo | Técnico | Fácil | v1 |
-| (**R08**) Etiquetas e hitos | Mínimo | Técnico | Fácil | v1 |
-| (**R09**) Rama master | Mínimo | Técnico | Fácil | v1 |
-| (**R10**) Gestión del proyecto | Mínimo | Técnico | Fácil | v1 |
-| (**R11**) Final de cada iteración | Mínimo | Técnico | Fácil | v1 |
-| (**R12**) Validación de formularios | Mínimo | Técnico | Fácil | v1 |
-| (**R13**) Gestión de ventanas | Mínimo | Técnico | Fácil | v1 |
-| (**R14**) Manejo de eventos | Mínimo | Técnico | Fácil | v1 |
-| (**R15**) DOM | Mínimo | Técnico | Fácil | v1 |
-| (**R16**) Almacenamiento en el lado del cliente | Mínimo | Técnico | Fácil | v1 |
-| (**R17**) jQuery, jQuery UI | Mínimo | Técnico | Fácil | v1 |
-| (**R18**) Plugin no trabajado en clase | Mínimo | Técnico | Fácil | v1 |
-| (**R19**) Utilización de AJAX | Mínimo | Técnico | Fácil | v1 |
-| (**R20**) ECMAScript2015 (ES6) | Mínimo | Técnico | Fácil | v1 |
-| (**R21**) PHP | Mínimo | Técnico | Fácil | v1 |
-| (**R22**) Yii2 Framework | Mínimo | Técnico | Fácil | v1 |
-| (**R23**) PostgreSQL | Mínimo | Técnico | Fácil | v1 |
-| (**R24**) Heroku | Mínimo | Técnico | Fácil | v1 |
-| (**R25**) Codeception | Mínimo | Técnico | Fácil | v1 |
-| (**R26**) Code Climate | Mínimo | Técnico | Fácil | v1 |
-| (**R27**) Aplicación escalable | Mínimo | Técnico | Fácil | v1 |
-| (**R28**) Tecnología AJAX | Mínimo | Técnico | Fácil | v1 |
-| (**R29**) Etiquetas semánticas de HTML5 | Mínimo | Técnico | Fácil | v1 |
-| (**R30**) Presentación mediante CSS | Mínimo | Técnico | Fácil | v1 |
-| (**R31**) Diseño flexible | Mínimo | Técnico | Fácil | v1 |
-| (**R32**) Transiciones, transformaciones, animaciones y contenido multimedia | Mínimo | Técnico | Fácil | v1 |
-| (**R33**) Uso de microdatos | Mínimo | Técnico | Fácil | v1 |
-| (**R34**) Validación HTML5, CSS3 y accesibilidad | Mínimo | Técnico | Fácil | v1 |
-| (**R35**) Diseño para varias resoluciones | Mínimo | Técnico | Fácil | v1 |
-| (**R36**) Varios navegadores | Mínimo | Técnico | Fácil | v1 |
-| (**R37**) Despliegue en un Host | Mínimo | Técnico | Fácil | v1 |
-| (**R38**) Despliegue en un servidor local | Mínimo | Técnico | Fácil | v1 |
+| (**R1**) Requisitos como incidencias | Mínimo | Técnico | Fácil | v1 | 
+| (**R2**) Código fuente | Mínimo | Técnico | Fácil | v1 | 
+| (**R3**) Estilo del código | Mínimo | Técnico | Fácil | v1 | 
+| (**R4**) Tres lanzamientos | Mínimo | Técnico | Fácil | v1 | 
+| (**R5**) README.md | Mínimo | Técnico | Fácil | v1 | 
+| (**R6**) Documentación | Mínimo | Técnico | Fácil | v1 | 
+| (**R7**) Incidencias en GitHub | Mínimo | Técnico | Fácil | v1 | 
+| (**R8**) Etiquetas e hitos | Mínimo | Técnico | Fácil | v1 | 
+| (**R9**) Rama master | Mínimo | Técnico | Fácil | v1 | 
+| (**R10**) Gestión del proyecto | Mínimo | Técnico | Fácil | v1 | 
+| (**R11**) Final de cada iteración | Mínimo | Técnico | Fácil | v1 | 
+| (**R12**) Validación de formularios | Mínimo | Técnico | Fácil | v1 | 
+| (**R13**) Gestión de ventanas | Mínimo | Técnico | Fácil | v1 | 
+| (**R14**) Manejo de eventos | Mínimo | Técnico | Fácil | v1 | 
+| (**R15**) DOM | Mínimo | Técnico | Fácil | v1 | 
+| (**R16**) Almacenamiento en el lado del cliente | Mínimo | Técnico | Fácil | v1 | 
+| (**R17**) jQuery, jQuery UI | Mínimo | Técnico | Fácil | v1 | 
+| (**R18**) Plugin no trabajado en clase | Mínimo | Técnico | Fácil | v1 | 
+| (**R19**) Utilización de AJAX | Mínimo | Técnico | Fácil | v1 | 
+| (**R20**) ECMAScript2015 (ES6) | Mínimo | Técnico | Fácil | v1 | 
+| (**R21**) PHP | Mínimo | Técnico | Fácil | v1 | 
+| (**R22**) Yii2 Framework | Mínimo | Técnico | Fácil | v1 | 
+| (**R23**) PostgreSQL | Mínimo | Técnico | Fácil | v1 | 
+| (**R24**) Heroku | Mínimo | Técnico | Fácil | v1 | 
+| (**R25**) Codeception | Mínimo | Técnico | Fácil | v1 | 
+| (**R26**) Code Climate | Mínimo | Técnico | Fácil | v1 | 
+| (**R27**) Aplicación escalable | Mínimo | Técnico | Fácil | v1 | 
+| (**R28**) Tecnología AJAX | Mínimo | Técnico | Fácil | v1 | 
+| (**R29**) Etiquetas semánticas de HTML5 | Mínimo | Técnico | Fácil | v1 | 
+| (**R30**) Presentación mediante CSS | Mínimo | Técnico | Fácil | v1 | 
+| (**R31**) Diseño flexible | Mínimo | Técnico | Fácil | v1 | 
+| (**R32**) Transiciones, transformaciones, animaciones y contenido multimedia | Mínimo | Técnico | Fácil | v1 | 
+| (**R33**) Uso de microdatos | Mínimo | Técnico | Fácil | v1 | 
+| (**R34**) Validación HTML5, CSS3 y accesibilidad | Mínimo | Técnico | Fácil | v1 | 
+| (**R35**) Diseño para varias resoluciones | Mínimo | Técnico | Fácil | v1 | 
+| (**R36**) Varios navegadores | Mínimo | Técnico | Fácil | v1 | 
+| (**R37**) Despliegue en un Host | Mínimo | Técnico | Fácil | v1 | 
+| (**R38**) Despliegue en un servidor local | Mínimo | Técnico | Fácil | v1 | 
