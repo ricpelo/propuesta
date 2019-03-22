@@ -7,10 +7,12 @@ function fallo($mensaje)
     return 1;
 }
 
-if (file_exists('vendor')) {
-    require 'vendor/autoload.php';
-} elseif (file_exists('../vendor')) {
-    require '../vendor/autoload.php';
+define('BASE_DIR', dirname(__DIR__));
+
+if (file_exists(BASE_DIR . '/vendor')) {
+    require BASE_DIR . '/vendor/autoload.php';
+} elseif (file_exists(BASE_DIR . '/../vendor')) {
+    require BASE_DIR . '/../vendor/autoload.php';
 }
 
 $issues = isset($argv[1]) && $argv[1] === '-i';
@@ -32,7 +34,7 @@ if ($issues) {
 }
 
 \PhpOffice\PhpSpreadsheet\Settings::setLocale('es');
-$objPHPExcel = \PhpOffice\PhpSpreadsheet\IOFactory::load('requisitos.xls');
+$objPHPExcel = \PhpOffice\PhpSpreadsheet\IOFactory::load(BASE_DIR . '/requisitos.xls');
 $objWorksheet = $objPHPExcel->getSheet(0);
 $highestRow = $objWorksheet->getHighestDataRow(); // e.g. 10
 $highestColumn = $objWorksheet->getHighestDataColumn(); // e.g 'F'
@@ -255,12 +257,12 @@ if (!$issues) {
 }
 
 echo "\033[1;28m# Generando archivo requisitos.md...\033[0m\n";
-file_put_contents('requisitos.md', $requisitos . $resumen, LOCK_EX);
+file_put_contents(BASE_DIR . '/requisitos.md', $requisitos . $resumen, LOCK_EX);
 
 if ($issues) {
     echo "\033[1;28m# Actualizando archivo requisitos.xls...\033[0m\n";
     $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xls($objPHPExcel);
-    $writer->save('requisitos.xls');
+    $writer->save(BASE_DIR . '/requisitos.xls');
     echo "\033[1;31m# No olvides ir a https://github.com/$login/$repo/projects/{$project['number']}\n";
     echo "  para configurar la automatización de las columnas del proyecto en GitHub.\033[0m\n";
 }

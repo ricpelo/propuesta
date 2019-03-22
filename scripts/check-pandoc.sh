@@ -10,7 +10,7 @@ instalar()
 
 VER=$(curl --silent "https://api.github.com/repos/jgm/pandoc/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")')
 
-if ! dpkg -s pandoc > /dev/null 2>&1; then
+if [ -z "$(which pandoc)" ]; then
     echo "Descargando e instalando Pandoc $VER..."
     instalar $VER
 else
