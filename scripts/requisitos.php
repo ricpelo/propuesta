@@ -89,6 +89,11 @@ if ($fallo == 0) {
     exit($fallo);
 }
 
+pcntl_async_signals(true);
+pcntl_signal(SIGINT, function () {});
+pcntl_signal(SIGTERM, function () {});
+pcntl_signal(SIGTSTP, function () {});
+
 if ($issues) {
     try {
         $client = new \Github\Client();
@@ -191,7 +196,7 @@ $resumen = "\n## Cuadro resumen\n\n"
 
 echo "\033[1;28m# Leyendo archivo requisitos.xls...\033[0m\n";
 
-for ($row = 2; $row <= $highestRow; $row++) {
+for ($row = 2, $i = 1; $row <= $highestRow; $row++) {
     echo '(' . ($row - 1) . '/' . ($highestRow - 1) . ') ';
     $codigo      = $objWorksheet->getCell("A$row")->getValue();
     $corta       = $objWorksheet->getCell("B$row")->getValue();
@@ -208,14 +213,14 @@ for ($row = 2; $row <= $highestRow; $row++) {
 
     if ($issues) {
         if ($incidencia === null) {
-            if (($row - 1) % 10 === 0) {
+            if ($i++ % 10 === 0) {
                 echo '# Deteniendo la ejecución por 5 segundos para no exceder el límite de tasa...';
                 sleep(5);
                 echo "\n";
             }
             echo "Generando incidencia para $codigo en GitHub...";
             $issue = $client->api('issue')->create($login, $repo, [
-                'title' => $corta,
+                'title' => "($codigo) $corta",
                 'body' => $larga,
                 'assignee' => $login,
                 'milestone' => mb_substr($entrega, 1, 1),
@@ -234,7 +239,6 @@ for ($row = 2; $row <= $highestRow; $row++) {
             echo " #$incidencia\n";
         } else {
             echo "El requisito $codigo ya tiene asociada la incidencia #$incidencia.\n";
-            $issue = $client->api('issue')->show($login, $repo, $incidencia);
         }
         $link = "https://github.com/$login/$repo/issues/$incidencia";
     }
