@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo ":lang: es\n:toc:\n:toc-title: Tabla de contenidos\n:sectnums:\n\n" | cat - pro.adoc > propuesta.adoc
+echo -e ":lang: es\n:toc:\n:toc-title: Tabla de contenidos\n:sectnums:\n\n" | cat - pro.adoc > propuesta.adoc
 
 S[1]='\[cols=">,<",options="header",\]'
 S[2]='\[width="100%",cols=">43%,<57%",options="header",\]'
