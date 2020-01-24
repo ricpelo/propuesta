@@ -1,14 +1,18 @@
 .PHONY: all check pro
 
-all: check pro
+all: check propuesta.pdf
 
-check:
+check: | vendor vendor/bundle
 	@scripts/check-pandoc.sh
 	@scripts/check-bundler.sh
-	@[ -d vendor ] || composer install
+
+vendor:
+	@composer install
+
+vendor/bundle:
 	@bundle install --path vendor/bundle
 
-pro:
+propuesta.pdf: requisitos.xls propuesta.md
 	@php scripts/requisitos.php
 	@pandoc -f markdown-smart -s propuesta.md requisitos.md -o pro.adoc
 	@scripts/replace.sh

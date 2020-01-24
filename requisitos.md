@@ -174,7 +174,7 @@
 
 | **R20**     | **ECMAScript2015 (ES6)**         |
 | --------------: | :------------------- |
-| **Descripción** | Uso de las nuevas incorporaciones del estándar ECMAScript2015 (ES6)             |
+| **Descripción** | Uso de las nuevas incorporaciones del estándar ECMAScript2015 (ES6).             |
 | **Prioridad**   | Mínimo           |
 | **Tipo**        | Técnico                |
 | **Complejidad** | Fácil         |
@@ -183,7 +183,7 @@
 
 | **R21**     | **PHP**         |
 | --------------: | :------------------- |
-| **Descripción** | Usar PHP 7.1 ó superior.             |
+| **Descripción** | Usar PHP 7.3 ó superior.             |
 | **Prioridad**   | Mínimo           |
 | **Tipo**        | Técnico                |
 | **Complejidad** | Fácil         |
@@ -192,7 +192,7 @@
 
 | **R22**     | **Yii2 Framework**         |
 | --------------: | :------------------- |
-| **Descripción** | Usar Yii2 Framework versión 2.0.10 ó superior.             |
+| **Descripción** | Usar Yii2 Framework versión 2.0.29 ó superior.             |
 | **Prioridad**   | Mínimo           |
 | **Tipo**        | Técnico                |
 | **Complejidad** | Fácil         |
@@ -201,7 +201,7 @@
 
 | **R23**     | **PostgreSQL**         |
 | --------------: | :------------------- |
-| **Descripción** | Usar PostgreSQL versión 9.6 ó superior.             |
+| **Descripción** | Usar PostgreSQL versión 12 ó superior.             |
 | **Prioridad**   | Mínimo           |
 | **Tipo**        | Técnico                |
 | **Complejidad** | Fácil         |

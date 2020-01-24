@@ -1,6 +1,6 @@
 % Videoclub "Los Pajaritos"
 % Ricardo Pérez
-% Curso 2017/18
+% Curso 2019/20
 
 # Descripción general del proyecto
 
