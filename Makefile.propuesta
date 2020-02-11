@@ -1,15 +1,17 @@
-.PHONY: all check pro
+.PHONY: all check pandoc
 
 all: check propuesta.pdf
 
-check: | vendor vendor/bundle
+check: pandoc vendor vendor/bundle
+
+pandoc:
 	@scripts/check-pandoc.sh
-	@scripts/check-bundler.sh
 
 vendor:
 	@composer install
 
 vendor/bundle:
+	@scripts/check-bundler.sh
 	@bundle install --path vendor/bundle
 
 propuesta.pdf: requisitos.xls propuesta.md
