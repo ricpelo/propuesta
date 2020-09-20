@@ -12,7 +12,8 @@ vendor:
 
 vendor/bundle:
 	@scripts/check-bundler.sh
-	@bundle install --path vendor/bundle
+	@bundle config set path 'vendor/bundle'
+	@bundle install
 
 propuesta.pdf: requisitos.xls propuesta.md
 	@php scripts/requisitos.php

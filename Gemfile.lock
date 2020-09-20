@@ -56,6 +56,3 @@ DEPENDENCIES
   asciidoctor
   asciidoctor-pdf
   concurrent-ruby
-
-BUNDLED WITH
-   1.16.1
