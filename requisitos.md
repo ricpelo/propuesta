@@ -84,7 +84,7 @@
 
 | **R10**     | **Gestión del proyecto**         |
 | --------------: | :------------------- |
-| **Descripción** | Usar Waffle o similar para la gestión general del proyecto.             |
+| **Descripción** | Usar GitHub Projects o similar para la gestión general del proyecto.             |
 | **Prioridad**   | Mínimo           |
 | **Tipo**        | Técnico                |
 | **Complejidad** | Fácil         |

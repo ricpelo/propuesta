@@ -1,6 +1,6 @@
-% Videoclub "Los Pajaritos"
+% Videoclub «Los Pajaritos»
 % Ricardo Pérez
-% Curso 2019/20
+% Curso 2021/22
 
 # Descripción general del proyecto
 
