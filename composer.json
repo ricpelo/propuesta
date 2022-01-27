@@ -1,7 +1,8 @@
 {
     "require": {
-        "phpoffice/phpspreadsheet": "^1.1",
-        "knplabs/github-api": "^2.11",
-        "php-http/guzzle6-adapter": "^1.1"
+        "knplabs/github-api": "^3.0",
+        "guzzlehttp/guzzle": "^7.0.1",
+        "http-interop/http-factory-guzzle": "^1.0",
+        "phpoffice/phpspreadsheet": "^1.21"
     }
 }
