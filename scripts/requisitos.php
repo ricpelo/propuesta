@@ -97,7 +97,7 @@ pcntl_signal(SIGTSTP, function () {});
 if ($issues) {
     try {
         $client = new \Github\Client();
-        $client->authenticate(getenv('GITHUB_TOKEN'), null, \Github\Client::AUTH_HTTP_TOKEN);
+        $client->authenticate(getenv('GITHUB_TOKEN'), null, \Github\Client::AUTH_ACCESS_TOKEN);
         $login = $client->currentUser()->show()['login'];
         $repo = trim(`basename -s .git $(git remote get-url origin)`);
     } catch (\Github\Exception\RuntimeException $e) {

@@ -21,7 +21,7 @@
 
 | **R3**     | **Estilo del código**         |
 | --------------: | :------------------- |
-| **Descripción** | Estilo del código según las normas internas de Yii2 para el código y para las plantillas de las vistas.             |
+| **Descripción** | Estilo del código según las normas internas de Laravel para el código y para las plantillas de las vistas.             |
 | **Prioridad**   | Mínimo           |
 | **Tipo**        | Técnico                |
 | **Complejidad** | Fácil         |
@@ -48,7 +48,7 @@
 
 | **R6**     | **Documentación**         |
 | --------------: | :------------------- |
-| **Descripción** | Documentación generada con yii2-apidoc y publicada en GitHub Pages a partir del contenido del directorio /docs:  - Contenido:   - Guía general.   - API. - Formato: GitHub flavored Markdown (fuente) y HTML (resultado). - Usar make docs para crear la documentación. - Opcional: conversión a PDF.             |
+| **Descripción** | Documentación publicada en GitHub Pages a partir del contenido del directorio /docs:  - Contenido:   - Guía general.   - API. - Formato: GitHub flavored Markdown (fuente) y HTML (resultado). - Usar make docs para crear la documentación. - Opcional: conversión a PDF.             |
 | **Prioridad**   | Mínimo           |
 | **Tipo**        | Técnico                |
 | **Complejidad** | Fácil         |
