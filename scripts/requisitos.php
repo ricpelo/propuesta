@@ -105,6 +105,7 @@ if ($issues) {
         exit(1);
     }
 
+/*
     $projects = $client->api('repo')->projects()->configure()->all($login, $repo);
 
     switch (count($projects)) {
@@ -146,6 +147,7 @@ if ($issues) {
             }
             break;
     }
+*/
 
     $milestones = $client->api('issue')->milestones()->all($login, $repo);
     $entregas = [1 => 'v1', 2 => 'v2', 3 => 'v3'];
@@ -229,13 +231,13 @@ for ($row = 2, $i = 1; $row <= $highestRow; $row++) {
                     mb_strtolower($tipo),
                     mb_strtolower($complejidad)
                 ],
-                'projects' => "$login/$repo/{$project['number']}",
+/*                'projects' => "$login/$repo/{$project['number']}", */
             ]);
             $incidencia = $issue['number'];
             $link = "https://github.com/$repo/issues/$incidencia";
             $objWorksheet->setCellValue("H$row", $incidencia);
             $objWorksheet->getCell("H$row")->getHyperlink()->setUrl($link);
-            $client->api('repo')->projects()->columns()->cards()->configure()->create($column['id'], ['content_type' => 'Issue', 'content_id' => $issue['id']]);
+/*            $client->api('repo')->projects()->columns()->cards()->configure()->create($column['id'], ['content_type' => 'Issue', 'content_id' => $issue['id']]); */
             echo " #$incidencia\n";
         } else {
             echo "El requisito $codigo ya tiene asociada la incidencia #$incidencia.\n";
@@ -268,6 +270,6 @@ if ($issues) {
     echo "\033[1;28m# Actualizando archivo requisitos.xls...\033[0m\n";
     $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xls($objPHPExcel);
     $writer->save(BASE_DIR . '/requisitos.xls');
-    echo "\033[1;31m# No olvides ir a https://github.com/$login/$repo/projects/{$project['number']}\n";
-    echo "  para configurar la automatización de las columnas del proyecto en GitHub.\033[0m\n";
+/*    echo "\033[1;31m# No olvides ir a https://github.com/$login/$repo/projects/{$project['number']}\n";
+    echo "  para configurar la automatización de las columnas del proyecto en GitHub.\033[0m\n"; */
 }
