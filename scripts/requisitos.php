@@ -216,8 +216,8 @@ for ($row = 2, $i = 1; $row <= $highestRow; $row++) {
     if ($issues) {
         if ($incidencia === null) {
             if ($i++ % 10 === 0) {
-                echo '# Deteniendo la ejecución por 5 segundos para no exceder el límite de tasa...';
-                sleep(5);
+                echo '# Deteniendo la ejecución por 20 segundos para no exceder el límite de tasa...';
+                sleep(20);
                 echo "\n";
             }
             echo "Generando incidencia para $codigo en GitHub...";
