@@ -144,32 +144,46 @@ if (!isset($result['data']['repository'])
 
 $repo_id = $result['data']['repository']['id'];
 
-$query = <<<EOT
-mutation CreateIssue {
-    createIssue(input: {
-        repositoryId: "$repo_id",
-        title: "TestIssue",
-        body: "Not able to create an issue",
-    }) {
-        issue {
-            id
-            number
-            body
-        }
-    }
-}
-EOT;
+$result = $client->api('issue')->create($login, $repo, [
+    'title' => "(R999) Prueba",
+    'body' => "Prueba prueba",
+    'assignee' => $login,
+    'milestone' => 1,
+    'labels' => [
+        'Importante',
+        'Funcional',
+        'Media',
+    ],
+]);
 
-$result = $client->api('graphql')->execute($query);
+$issue_id = $result['node_id'];
 
-if (!isset($result['data']['createIssue'])
-    || !isset($result['data']['createIssue']['issue'])
-    || empty($result['data']['createIssue']['issue'])) {
-    echo "Error: no se ha podido crear la incidencia.\n";
-    exit(1);
-}
+// $query = <<<EOT
+// mutation CreateIssue {
+//     createIssue(input: {
+//         repositoryId: "$repo_id",
+//         title: "TestIssue",
+//         body: "Not able to create an issue",
+//     }) {
+//         issue {
+//             id
+//             number
+//             body
+//         }
+//     }
+// }
+// EOT;
 
-$issue_id = $result['data']['createIssue']['issue']['id'];
+// $result = $client->api('graphql')->execute($query);
+
+// if (!isset($result['data']['createIssue'])
+//     || !isset($result['data']['createIssue']['issue'])
+//     || empty($result['data']['createIssue']['issue'])) {
+//     echo "Error: no se ha podido crear la incidencia.\n";
+//     exit(1);
+// }
+
+// $issue_id = $result['data']['createIssue']['issue']['id'];
 
 $query = <<<EOT
 mutation {
