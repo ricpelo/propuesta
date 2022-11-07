@@ -256,7 +256,9 @@ for ($row = 2, $i = 1; $row <= $highestRow; $row++) {
                  . $incidencia . "\n\n";
 
     $resumen .= "| (**$codigo**) $cortaMd | $prioridad | $tipo | $complejidad | $entrega | $incidencia\n";
-    sleep(1);
+    if ($issues) {
+        sleep(1);
+    }
 }
 
 if (!$issues) {
